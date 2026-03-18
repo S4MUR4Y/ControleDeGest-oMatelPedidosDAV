@@ -1,7 +1,13 @@
 ﻿Imports System.Threading.Tasks
 
 Public Class LOGIN
-
+    Private Sub LOGIN_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ' Carrega usuário e senha salvos
+        If Not String.IsNullOrEmpty(My.Settings.UsuarioSalvo) Then
+            PoisonTextBoxLOGIN.Text = My.Settings.UsuarioSalvo
+            PoisonTextBoxSENHA.Text = My.Settings.SenhaSalva
+        End If
+    End Sub
     Private Async Sub PoisonButtonACESSAR_Click(sender As Object, e As EventArgs) Handles PoisonButtonACESSAR.Click
 
         Dim login As String = PoisonTextBoxLOGIN.Text.Trim().ToUpper()
@@ -24,6 +30,12 @@ Public Class LOGIN
 
             Select Case resultado
                 Case "OK"
+
+                    ' Salva usuário e senha na máquina
+                    My.Settings.UsuarioSalvo = PoisonTextBoxLOGIN.Text
+                    My.Settings.SenhaSalva = PoisonTextBoxSENHA.Text
+                    My.Settings.Save()
+
                     PoisonProgressBarPROGRESSO.Value = 80
                     LabelPROGRESSO.Text = "Carregando sistema..."
                     Await Task.Delay(800) ' Pequena pausa visual
@@ -111,12 +123,27 @@ Public Class LOGIN
     End Sub
 
     Private Sub ButtonTESTESERVER_Click(sender As Object, e As EventArgs) Handles ButtonTESTESERVER.Click
+        Dim senha = InputBox("Digite a senha de acesso:", "Autenticação", "")
+
+        If String.IsNullOrEmpty(senha) Then Return
+
+        If senha <> "92737148" Then
+            MessageBox.Show("Senha incorreta!", "Acesso Negado", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
         Try
             Dim conn = ModDB.AbrirConexao()
-            MessageBox.Show("Conexão ao servidor está OK!", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBox.Show("Servidor conectado com sucesso!" & Environment.NewLine &
+            "IP: 192.168.3.33" & Environment.NewLine &
+            "Banco: controle_matel" & Environment.NewLine &
+            "Status: Online ✔",
+            "Conexão OK", MessageBoxButtons.OK, MessageBoxIcon.Information)
             conn.Close()
         Catch ex As Exception
-            MessageBox.Show("Erro: " & ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Falha na conexão!" & Environment.NewLine &
+            "Erro: " & ex.Message,
+            "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 End Class

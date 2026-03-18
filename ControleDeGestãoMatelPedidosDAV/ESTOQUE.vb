@@ -3,9 +3,16 @@ Imports System.IO
 
 Public Class ESTOQUE
 
+    Public ProdutoSelecionado As DataRow
     Private TabelaCompleta As DataTable
+    Public ModoSelecao As Boolean = False
+    Public ProdutosSelecionados As New List(Of Dictionary(Of String, String))
 
     Private Async Sub ESTOQUE_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ' Ativa ou desativa conforme o modo
+        ListViewSELECIONADOS.Visible = ModoSelecao
+        ButtonCONFIRMAR.Visible = ModoSelecao
+
         ComboBoxOPCAO.Items.Clear()
         ComboBoxOPCAO.Items.Add("Nome do Produto")
         ComboBoxOPCAO.Items.Add("Código")
@@ -14,35 +21,33 @@ Public Class ESTOQUE
 
         TextBoxPESQUISA.Enabled = False
         ComboBoxOPCAO.Enabled = False
-
         LabelCARREGAMENTOESTOQUE.Visible = True
+        LabelCARREGAMENTOESTOQUE.Text = "Carregando..."
         PoisonProgressBarCARREGAMENTOESTOQUE.Visible = True
         PoisonProgressBarCARREGAMENTOESTOQUE.Value = 0
 
-        LabelCARREGAMENTOESTOQUE.Text = "Abrindo arquivo..."
-        PoisonProgressBarCARREGAMENTOESTOQUE.Value = 10
-        Await Task.Delay(400)
-
-        LabelCARREGAMENTOESTOQUE.Text = "Lendo produtos..."
-        PoisonProgressBarCARREGAMENTOESTOQUE.Value = 30
-        Await Task.Delay(400)
-
+        ' Carrega direto sem delays
         Await Task.Run(Sub() CarregarExcel())
-
-        LabelCARREGAMENTOESTOQUE.Text = "Organizando dados..."
-        PoisonProgressBarCARREGAMENTOESTOQUE.Value = 70
-        Await Task.Delay(400)
-
-        LabelCARREGAMENTOESTOQUE.Text = "Concluído!"
-        PoisonProgressBarCARREGAMENTOESTOQUE.Value = 100
-        Await Task.Delay(600)
 
         LabelCARREGAMENTOESTOQUE.Visible = False
         PoisonProgressBarCARREGAMENTOESTOQUE.Visible = False
-
         TextBoxPESQUISA.Enabled = True
         ComboBoxOPCAO.Enabled = True
         TextBoxPESQUISA.Focus()
+        ConfigurarListView()
+        ListViewSELECIONADOS.Visible = ModoSelecao
+        ButtonCONFIRMAR.Visible = ModoSelecao
+    End Sub
+
+    ' Configura o ListView no Load
+    Private Sub ConfigurarListView()
+        ListViewSELECIONADOS.View = View.Details
+        ListViewSELECIONADOS.FullRowSelect = True
+        ListViewSELECIONADOS.GridLines = True
+        ListViewSELECIONADOS.Columns.Clear()
+        ListViewSELECIONADOS.Columns.Add("Código", 80)
+        ListViewSELECIONADOS.Columns.Add("Nome", 250)
+        ListViewSELECIONADOS.Columns.Add("Qtde", 60)
     End Sub
 
     Private Sub CarregarExcel()
@@ -65,17 +70,24 @@ Public Class ESTOQUE
                     dr("Código") = row.Cell(1).GetString().Trim()
                     dr("Nome do Produto") = row.Cell(2).GetString().Trim()
                     dr("Referência") = row.Cell(3).GetString().Trim()
-
-                    Dim valor As Decimal
-                    Dim celula = row.Cell(4).GetString().Trim().Replace("R$", "").Replace(".", "").Replace(",", ".").Trim()
-                    If Decimal.TryParse(celula, System.Globalization.NumberStyles.Any,
-                                    System.Globalization.CultureInfo.InvariantCulture, valor) Then
-                        dr("R$ Custo") = valor
-                    Else
-                        dr("R$ Custo") = 0D
-                    End If
-
-                    tabela.Rows.Add(dr)
+                    Dim valor As Decimal = 0D
+                    Try
+                        If Not String.IsNullOrEmpty(row.Cell(4).GetString()) Then
+                            Dim celula = row.Cell(4).GetString().Trim()
+                            celula = celula.Replace("R$", "").Replace(" ", "").Trim()
+                            If celula.Contains(",") AndAlso celula.Contains(".") Then
+                                celula = celula.Replace(".", "").Replace(",", ".")
+                            ElseIf celula.Contains(",") Then
+                                celula = celula.Replace(",", ".")
+                            End If
+                            Decimal.TryParse(celula, System.Globalization.NumberStyles.Any,
+                System.Globalization.CultureInfo.InvariantCulture, valor)
+                        End If
+                    Catch
+                        valor = 0D
+                    End Try
+                    dr("R$ Custo") = valor
+                    tabela.Rows.Add(dr) ' ← Faltava essa linha!
                 Next
             End Using
 
@@ -178,5 +190,90 @@ Public Class ESTOQUE
         PoisonDataGridViewESTOQUE.FirstDisplayedScrollingRowIndex = novaLinha
 
         CType(e, HandledMouseEventArgs).Handled = True
+    End Sub
+    Private Sub PoisonDataGridViewESTOQUE_KeyDown(sender As Object, e As KeyEventArgs) Handles PoisonDataGridViewESTOQUE.KeyDown
+        ' Setas — navega normalmente
+        If e.KeyCode = Keys.Up OrElse e.KeyCode = Keys.Down Then
+            Return
+        End If
+
+        ' Modo consulta — Enter fecha e retorna produto único
+        If e.KeyCode = Keys.Enter AndAlso Not ModoSelecao Then
+            If PoisonDataGridViewESTOQUE.CurrentRow IsNot Nothing Then
+                ProdutoSelecionado = CType(PoisonDataGridViewESTOQUE.DataSource, DataTable).Rows(
+                PoisonDataGridViewESTOQUE.CurrentRow.Index)
+                Me.Close()
+            End If
+            e.SuppressKeyPress = True
+            Return
+        End If
+
+        ' Modo seleção — Espaço pergunta qtde e adiciona no ListView
+        If e.KeyCode = Keys.Space AndAlso ModoSelecao Then
+            If PoisonDataGridViewESTOQUE.CurrentRow Is Nothing Then Return
+
+            Dim tbl = CType(PoisonDataGridViewESTOQUE.DataSource, DataTable)
+            Dim row = tbl.Rows(PoisonDataGridViewESTOQUE.CurrentRow.Index)
+
+            ' Pergunta a quantidade
+            Dim qtdeStr = InputBox("Quantidade para:" & Environment.NewLine &
+            row("Nome do Produto").ToString(), "Quantidade", "1")
+            If String.IsNullOrEmpty(qtdeStr) Then Return
+
+            Dim qtde As Decimal = 1D
+            Decimal.TryParse(qtdeStr.Replace(",", "."),
+                         System.Globalization.NumberStyles.Any,
+                         System.Globalization.CultureInfo.InvariantCulture, qtde)
+            If qtde <= 0 Then
+                MessageBox.Show("Quantidade inválida!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
+            End If
+
+            ' Pega o unitário com segurança
+            Dim unitario As Decimal = 0D
+            Dim rawCusto = row("R$ Custo")
+            If Not IsDBNull(rawCusto) Then
+                Try
+                    unitario = Convert.ToDecimal(rawCusto)
+                Catch
+                    unitario = 0D
+                End Try
+            End If
+
+            ' Adiciona no ListView
+            Dim item As New ListViewItem(row("Código").ToString())
+            item.SubItems.Add(row("Nome do Produto").ToString())
+            item.SubItems.Add(qtde.ToString("0.###"))
+            ListViewSELECIONADOS.Items.Add(item)
+
+            ' Adiciona na lista de retorno com unitário já como string InvariantCulture
+            ProdutosSelecionados.Add(New Dictionary(Of String, String) From {
+            {"CODIGO", row("Código").ToString()},
+            {"NOME", row("Nome do Produto").ToString()},
+            {"REFERENCIA", If(IsDBNull(row("Referência")), "", row("Referência").ToString())},
+            {"QTDE", qtde.ToString(System.Globalization.CultureInfo.InvariantCulture)},
+            {"UNITARIO", unitario.ToString(System.Globalization.CultureInfo.InvariantCulture)}
+        })
+
+            e.SuppressKeyPress = True
+            Return
+        End If
+
+        ' Modo seleção — Enter confirma e fecha
+        If e.KeyCode = Keys.Enter AndAlso ModoSelecao Then
+            If ProdutosSelecionados.Count = 0 Then
+                MessageBox.Show("Selecione pelo menos um produto!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
+            End If
+            Me.Close()
+            e.SuppressKeyPress = True
+        End If
+    End Sub
+    Private Sub ButtonCONFIRMAR_Click(sender As Object, e As EventArgs) Handles ButtonCONFIRMAR.Click
+        If ProdutosSelecionados.Count = 0 Then
+            MessageBox.Show("Selecione pelo menos um produto!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+        Me.Close()
     End Sub
 End Class

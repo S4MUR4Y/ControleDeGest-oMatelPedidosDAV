@@ -122,6 +122,7 @@ Partial Class DAV
         PoisonDataGridViewDADOS.AllowUserToResizeRows = False
         PoisonDataGridViewDADOS.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
         PoisonDataGridViewDADOS.BackgroundColor = Color.FromArgb(CByte(255), CByte(255), CByte(255))
+        PoisonDataGridViewDADOS.BorderStyle = BorderStyle.None
         PoisonDataGridViewDADOS.CellBorderStyle = DataGridViewCellBorderStyle.None
         PoisonDataGridViewDADOS.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None
         DataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft
@@ -169,6 +170,8 @@ Partial Class DAV
         Controls.Add(PoisonDataGridViewDADOS)
         Controls.Add(Panel1)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
+        MaximizeBox = False
+        MinimizeBox = False
         Name = "DAV"
         StartPosition = FormStartPosition.CenterScreen
         Text = "SAYTECH | CONTROLE DE DAV"

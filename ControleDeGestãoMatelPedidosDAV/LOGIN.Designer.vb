@@ -26,12 +26,12 @@ Partial Class LOGIN
         PictureBox1 = New PictureBox()
         PictureBox2 = New PictureBox()
         PoisonTextBoxLOGIN = New ReaLTaiizor.Controls.PoisonTextBox()
-        PoisonButtonACESSAR = New ReaLTaiizor.Controls.PoisonButton()
         PoisonProgressBarPROGRESSO = New ReaLTaiizor.Controls.PoisonProgressBar()
         PoisonTextBoxSENHA = New ReaLTaiizor.Controls.PoisonTextBox()
         PictureBox3 = New PictureBox()
         LabelPROGRESSO = New Label()
         ButtonTESTESERVER = New Button()
+        PoisonButtonACESSAR = New Button()
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         CType(PictureBox2, ComponentModel.ISupportInitialize).BeginInit()
         CType(PictureBox3, ComponentModel.ISupportInitialize).BeginInit()
@@ -89,28 +89,6 @@ Partial Class LOGIN
         PoisonTextBoxLOGIN.UseSelectable = True
         PoisonTextBoxLOGIN.WaterMarkColor = Color.FromArgb(CByte(109), CByte(109), CByte(109))
         PoisonTextBoxLOGIN.WaterMarkFont = New Font("Segoe UI", 12F, FontStyle.Italic, GraphicsUnit.Pixel)
-        ' 
-        ' PoisonButtonACESSAR
-        ' 
-        PoisonButtonACESSAR.Cursor = Cursors.Hand
-        PoisonButtonACESSAR.FlatAppearance.BorderColor = Color.Black
-        PoisonButtonACESSAR.FlatAppearance.BorderSize = 3
-        PoisonButtonACESSAR.FlatAppearance.MouseDownBackColor = SystemColors.MenuHighlight
-        PoisonButtonACESSAR.FlatAppearance.MouseOverBackColor = SystemColors.MenuHighlight
-        PoisonButtonACESSAR.FlatStyle = FlatStyle.Flat
-        PoisonButtonACESSAR.Font = New Font("Bahnschrift", 11.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        PoisonButtonACESSAR.ForeColor = Color.Black
-        PoisonButtonACESSAR.Location = New Point(34, 193)
-        PoisonButtonACESSAR.Name = "PoisonButtonACESSAR"
-        PoisonButtonACESSAR.Size = New Size(239, 28)
-        PoisonButtonACESSAR.TabIndex = 2
-        PoisonButtonACESSAR.Text = "ACESSAR"
-        PoisonButtonACESSAR.UseCustomBackColor = True
-        PoisonButtonACESSAR.UseCustomFont = True
-        PoisonButtonACESSAR.UseSelectable = True
-        PoisonButtonACESSAR.UseStyleColors = True
-        PoisonButtonACESSAR.UseVisualStyleBackColor = True
-        PoisonButtonACESSAR.UseWaitCursor = True
         ' 
         ' PoisonProgressBarPROGRESSO
         ' 
@@ -190,18 +168,34 @@ Partial Class LOGIN
         ButtonTESTESERVER.TabIndex = 9
         ButtonTESTESERVER.UseVisualStyleBackColor = False
         ' 
+        ' PoisonButtonACESSAR
+        ' 
+        PoisonButtonACESSAR.Cursor = Cursors.Hand
+        PoisonButtonACESSAR.FlatAppearance.BorderColor = SystemColors.MenuHighlight
+        PoisonButtonACESSAR.FlatAppearance.BorderSize = 2
+        PoisonButtonACESSAR.FlatAppearance.MouseDownBackColor = SystemColors.Menu
+        PoisonButtonACESSAR.FlatAppearance.MouseOverBackColor = SystemColors.Menu
+        PoisonButtonACESSAR.FlatStyle = FlatStyle.Flat
+        PoisonButtonACESSAR.Font = New Font("Bahnschrift SemiBold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        PoisonButtonACESSAR.Location = New Point(34, 190)
+        PoisonButtonACESSAR.Name = "PoisonButtonACESSAR"
+        PoisonButtonACESSAR.Size = New Size(237, 31)
+        PoisonButtonACESSAR.TabIndex = 2
+        PoisonButtonACESSAR.Text = "ACESSAR"
+        PoisonButtonACESSAR.UseVisualStyleBackColor = True
+        ' 
         ' LOGIN
         ' 
         AutoScaleDimensions = New SizeF(96F, 96F)
         AutoScaleMode = AutoScaleMode.Dpi
         BackColor = SystemColors.Window
         ClientSize = New Size(307, 258)
+        Controls.Add(PoisonButtonACESSAR)
         Controls.Add(ButtonTESTESERVER)
         Controls.Add(LabelPROGRESSO)
         Controls.Add(PictureBox3)
         Controls.Add(PoisonTextBoxSENHA)
         Controls.Add(PoisonProgressBarPROGRESSO)
-        Controls.Add(PoisonButtonACESSAR)
         Controls.Add(PoisonTextBoxLOGIN)
         Controls.Add(PictureBox2)
         Controls.Add(PictureBox1)
@@ -221,11 +215,11 @@ Partial Class LOGIN
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents PictureBox2 As PictureBox
     Friend WithEvents PoisonTextBoxLOGIN As ReaLTaiizor.Controls.PoisonTextBox
-    Friend WithEvents PoisonButtonACESSAR As ReaLTaiizor.Controls.PoisonButton
     Friend WithEvents PoisonProgressBarPROGRESSO As ReaLTaiizor.Controls.PoisonProgressBar
     Friend WithEvents PoisonTextBoxSENHA As ReaLTaiizor.Controls.PoisonTextBox
     Friend WithEvents PictureBox3 As PictureBox
     Friend WithEvents LabelPROGRESSO As Label
     Friend WithEvents ButtonTESTESERVER As Button
+    Friend WithEvents PoisonButtonACESSAR As Button
 
 End Class

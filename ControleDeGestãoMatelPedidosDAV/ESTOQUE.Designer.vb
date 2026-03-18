@@ -23,9 +23,9 @@ Partial Class ESTOQUE
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ESTOQUE))
-        Dim DataGridViewCellStyle1 As DataGridViewCellStyle = New DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As DataGridViewCellStyle = New DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As DataGridViewCellStyle = New DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As DataGridViewCellStyle = New DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As DataGridViewCellStyle = New DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As DataGridViewCellStyle = New DataGridViewCellStyle()
         Panel1 = New Panel()
         LabelCARREGAMENTOESTOQUE = New Label()
         PoisonProgressBarCARREGAMENTOESTOQUE = New ReaLTaiizor.Controls.PoisonProgressBar()
@@ -33,6 +33,8 @@ Partial Class ESTOQUE
         TextBoxPESQUISA = New TextBox()
         PictureBox1 = New PictureBox()
         PoisonDataGridViewESTOQUE = New ReaLTaiizor.Controls.PoisonDataGridView()
+        ListViewSELECIONADOS = New ListView()
+        ButtonCONFIRMAR = New Button()
         Panel1.SuspendLayout()
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         CType(PoisonDataGridViewESTOQUE, ComponentModel.ISupportInitialize).BeginInit()
@@ -49,7 +51,7 @@ Partial Class ESTOQUE
         Panel1.Controls.Add(PictureBox1)
         Panel1.Location = New Point(0, 0)
         Panel1.Name = "Panel1"
-        Panel1.Size = New Size(894, 39)
+        Panel1.Size = New Size(1176, 39)
         Panel1.TabIndex = 1
         ' 
         ' LabelCARREGAMENTOESTOQUE
@@ -57,7 +59,7 @@ Partial Class ESTOQUE
         LabelCARREGAMENTOESTOQUE.Anchor = AnchorStyles.Top Or AnchorStyles.Right
         LabelCARREGAMENTOESTOQUE.FlatStyle = FlatStyle.Flat
         LabelCARREGAMENTOESTOQUE.Font = New Font("Bahnschrift", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        LabelCARREGAMENTOESTOQUE.Location = New Point(695, 3)
+        LabelCARREGAMENTOESTOQUE.Location = New Point(977, 3)
         LabelCARREGAMENTOESTOQUE.Name = "LabelCARREGAMENTOESTOQUE"
         LabelCARREGAMENTOESTOQUE.Size = New Size(196, 17)
         LabelCARREGAMENTOESTOQUE.TabIndex = 6
@@ -66,7 +68,7 @@ Partial Class ESTOQUE
         ' PoisonProgressBarCARREGAMENTOESTOQUE
         ' 
         PoisonProgressBarCARREGAMENTOESTOQUE.Anchor = AnchorStyles.Top Or AnchorStyles.Right
-        PoisonProgressBarCARREGAMENTOESTOQUE.Location = New Point(695, 23)
+        PoisonProgressBarCARREGAMENTOESTOQUE.Location = New Point(977, 23)
         PoisonProgressBarCARREGAMENTOESTOQUE.Name = "PoisonProgressBarCARREGAMENTOESTOQUE"
         PoisonProgressBarCARREGAMENTOESTOQUE.Size = New Size(196, 13)
         PoisonProgressBarCARREGAMENTOESTOQUE.TabIndex = 5
@@ -109,56 +111,87 @@ Partial Class ESTOQUE
         PoisonDataGridViewESTOQUE.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
         PoisonDataGridViewESTOQUE.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
         PoisonDataGridViewESTOQUE.BackgroundColor = Color.FromArgb(CByte(255), CByte(255), CByte(255))
-        PoisonDataGridViewESTOQUE.BorderStyle = BorderStyle.None
+        PoisonDataGridViewESTOQUE.BorderStyle = BorderStyle.Fixed3D
         PoisonDataGridViewESTOQUE.CellBorderStyle = DataGridViewCellBorderStyle.None
         PoisonDataGridViewESTOQUE.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.TopCenter
-        DataGridViewCellStyle1.BackColor = Color.FromArgb(CByte(0), CByte(174), CByte(219))
-        DataGridViewCellStyle1.Font = New Font("Bahnschrift", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        DataGridViewCellStyle1.ForeColor = Color.FromArgb(CByte(255), CByte(255), CByte(255))
-        DataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(CByte(0), CByte(198), CByte(247))
-        DataGridViewCellStyle1.SelectionForeColor = Color.FromArgb(CByte(17), CByte(17), CByte(17))
-        DataGridViewCellStyle1.WrapMode = DataGridViewTriState.True
-        PoisonDataGridViewESTOQUE.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.TopCenter
+        DataGridViewCellStyle4.BackColor = Color.FromArgb(CByte(0), CByte(174), CByte(219))
+        DataGridViewCellStyle4.Font = New Font("Bahnschrift", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        DataGridViewCellStyle4.ForeColor = Color.FromArgb(CByte(255), CByte(255), CByte(255))
+        DataGridViewCellStyle4.SelectionBackColor = Color.FromArgb(CByte(0), CByte(198), CByte(247))
+        DataGridViewCellStyle4.SelectionForeColor = Color.FromArgb(CByte(17), CByte(17), CByte(17))
+        DataGridViewCellStyle4.WrapMode = DataGridViewTriState.True
+        PoisonDataGridViewESTOQUE.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
         PoisonDataGridViewESTOQUE.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle2.BackColor = Color.FromArgb(CByte(255), CByte(255), CByte(255))
-        DataGridViewCellStyle2.Font = New Font("Bahnschrift", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        DataGridViewCellStyle2.ForeColor = Color.Black
-        DataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(CByte(0), CByte(198), CByte(247))
-        DataGridViewCellStyle2.SelectionForeColor = Color.FromArgb(CByte(17), CByte(17), CByte(17))
-        DataGridViewCellStyle2.WrapMode = DataGridViewTriState.False
-        PoisonDataGridViewESTOQUE.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle5.BackColor = Color.FromArgb(CByte(255), CByte(255), CByte(255))
+        DataGridViewCellStyle5.Font = New Font("Bahnschrift", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        DataGridViewCellStyle5.ForeColor = Color.Black
+        DataGridViewCellStyle5.SelectionBackColor = Color.FromArgb(CByte(0), CByte(198), CByte(247))
+        DataGridViewCellStyle5.SelectionForeColor = Color.FromArgb(CByte(17), CByte(17), CByte(17))
+        DataGridViewCellStyle5.WrapMode = DataGridViewTriState.False
+        PoisonDataGridViewESTOQUE.DefaultCellStyle = DataGridViewCellStyle5
         PoisonDataGridViewESTOQUE.EnableHeadersVisualStyles = False
         PoisonDataGridViewESTOQUE.Font = New Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Pixel)
         PoisonDataGridViewESTOQUE.GridColor = Color.FromArgb(CByte(255), CByte(255), CByte(255))
-        PoisonDataGridViewESTOQUE.Location = New Point(0, 42)
+        PoisonDataGridViewESTOQUE.Location = New Point(3, 42)
         PoisonDataGridViewESTOQUE.Name = "PoisonDataGridViewESTOQUE"
         PoisonDataGridViewESTOQUE.ReadOnly = True
         PoisonDataGridViewESTOQUE.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle3.BackColor = Color.FromArgb(CByte(0), CByte(174), CByte(219))
-        DataGridViewCellStyle3.Font = New Font("Bahnschrift", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        DataGridViewCellStyle3.ForeColor = Color.FromArgb(CByte(255), CByte(255), CByte(255))
-        DataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(CByte(0), CByte(198), CByte(247))
-        DataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(CByte(17), CByte(17), CByte(17))
-        DataGridViewCellStyle3.WrapMode = DataGridViewTriState.True
-        PoisonDataGridViewESTOQUE.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle6.BackColor = Color.FromArgb(CByte(0), CByte(174), CByte(219))
+        DataGridViewCellStyle6.Font = New Font("Bahnschrift", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        DataGridViewCellStyle6.ForeColor = Color.FromArgb(CByte(255), CByte(255), CByte(255))
+        DataGridViewCellStyle6.SelectionBackColor = Color.FromArgb(CByte(0), CByte(198), CByte(247))
+        DataGridViewCellStyle6.SelectionForeColor = Color.FromArgb(CByte(17), CByte(17), CByte(17))
+        DataGridViewCellStyle6.WrapMode = DataGridViewTriState.True
+        PoisonDataGridViewESTOQUE.RowHeadersDefaultCellStyle = DataGridViewCellStyle6
         PoisonDataGridViewESTOQUE.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing
         PoisonDataGridViewESTOQUE.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-        PoisonDataGridViewESTOQUE.Size = New Size(894, 481)
+        PoisonDataGridViewESTOQUE.Size = New Size(791, 481)
         PoisonDataGridViewESTOQUE.Style = ReaLTaiizor.Enum.Poison.ColorStyle.Blue
         PoisonDataGridViewESTOQUE.TabIndex = 0
+        ' 
+        ' ListViewSELECIONADOS
+        ' 
+        ListViewSELECIONADOS.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Right
+        ListViewSELECIONADOS.Font = New Font("Bahnschrift", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        ListViewSELECIONADOS.Location = New Point(800, 42)
+        ListViewSELECIONADOS.Name = "ListViewSELECIONADOS"
+        ListViewSELECIONADOS.Size = New Size(376, 444)
+        ListViewSELECIONADOS.TabIndex = 2
+        ListViewSELECIONADOS.UseCompatibleStateImageBehavior = False
+        ' 
+        ' ButtonCONFIRMAR
+        ' 
+        ButtonCONFIRMAR.Anchor = AnchorStyles.Bottom Or AnchorStyles.Right
+        ButtonCONFIRMAR.FlatAppearance.BorderColor = SystemColors.MenuHighlight
+        ButtonCONFIRMAR.FlatAppearance.BorderSize = 2
+        ButtonCONFIRMAR.FlatAppearance.MouseDownBackColor = SystemColors.Menu
+        ButtonCONFIRMAR.FlatAppearance.MouseOverBackColor = SystemColors.Menu
+        ButtonCONFIRMAR.FlatStyle = FlatStyle.Flat
+        ButtonCONFIRMAR.Font = New Font("Bahnschrift", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        ButtonCONFIRMAR.Location = New Point(800, 492)
+        ButtonCONFIRMAR.Name = "ButtonCONFIRMAR"
+        ButtonCONFIRMAR.Size = New Size(376, 31)
+        ButtonCONFIRMAR.TabIndex = 3
+        ButtonCONFIRMAR.Text = "CONFIRMAR PRODUTOS"
+        ButtonCONFIRMAR.UseVisualStyleBackColor = True
         ' 
         ' ESTOQUE
         ' 
         AutoScaleDimensions = New SizeF(96F, 96F)
         AutoScaleMode = AutoScaleMode.Dpi
         BackColor = SystemColors.Window
-        ClientSize = New Size(895, 524)
+        ClientSize = New Size(1177, 528)
+        Controls.Add(ButtonCONFIRMAR)
+        Controls.Add(ListViewSELECIONADOS)
         Controls.Add(PoisonDataGridViewESTOQUE)
         Controls.Add(Panel1)
+        FormBorderStyle = FormBorderStyle.FixedToolWindow
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
+        MaximizeBox = False
+        MinimizeBox = False
         Name = "ESTOQUE"
         StartPosition = FormStartPosition.CenterParent
         Text = "ESTOQUE"
@@ -176,4 +209,6 @@ Partial Class ESTOQUE
     Friend WithEvents ComboBoxOPCAO As ComboBox
     Friend WithEvents LabelCARREGAMENTOESTOQUE As Label
     Friend WithEvents PoisonProgressBarCARREGAMENTOESTOQUE As ReaLTaiizor.Controls.PoisonProgressBar
+    Friend WithEvents ListViewSELECIONADOS As ListView
+    Friend WithEvents ButtonCONFIRMAR As Button
 End Class
