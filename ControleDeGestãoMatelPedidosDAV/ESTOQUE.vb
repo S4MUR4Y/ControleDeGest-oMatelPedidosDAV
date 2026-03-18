@@ -7,9 +7,10 @@ Public Class ESTOQUE
     Private TabelaCompleta As DataTable
     Public ModoSelecao As Boolean = False
     Public ProdutosSelecionados As New List(Of Dictionary(Of String, String))
+    Private _cancelar As Boolean = False
 
     Private Async Sub ESTOQUE_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ' Ativa ou desativa conforme o modo
+        _cancelar = False
         ListViewSELECIONADOS.Visible = ModoSelecao
         ButtonCONFIRMAR.Visible = ModoSelecao
 
@@ -26,8 +27,10 @@ Public Class ESTOQUE
         PoisonProgressBarCARREGAMENTOESTOQUE.Visible = True
         PoisonProgressBarCARREGAMENTOESTOQUE.Value = 0
 
-        ' Carrega direto sem delays
         Await Task.Run(Sub() CarregarExcel())
+
+        ' ← Se fechou durante o carregamento, não atualiza a UI
+        If _cancelar OrElse Me.IsDisposed Then Return
 
         LabelCARREGAMENTOESTOQUE.Visible = False
         PoisonProgressBarCARREGAMENTOESTOQUE.Visible = False
@@ -37,6 +40,17 @@ Public Class ESTOQUE
         ConfigurarListView()
         ListViewSELECIONADOS.Visible = ModoSelecao
         ButtonCONFIRMAR.Visible = ModoSelecao
+    End Sub
+
+    ' ← Sinaliza cancelamento antes de fechar
+    Private Sub ESTOQUE_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        Try
+            _cancelar = True
+            PoisonDataGridViewESTOQUE.DataSource = Nothing
+            TabelaCompleta?.Clear()
+            TabelaCompleta?.Dispose()
+        Catch ex As Exception
+        End Try
     End Sub
 
     ' Configura o ListView no Load

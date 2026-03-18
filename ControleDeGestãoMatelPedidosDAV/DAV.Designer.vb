@@ -44,22 +44,22 @@ Partial Class DAV
         Panel1.Controls.Add(ButtonEXCLUIR)
         Panel1.Controls.Add(ButtonALTERAR)
         Panel1.Controls.Add(ButtonINCLUIR)
-        Panel1.Location = New Point(0, 0)
+        Panel1.Location = New Point(2, 1)
         Panel1.Name = "Panel1"
-        Panel1.Size = New Size(744, 39)
+        Panel1.Size = New Size(983, 39)
         Panel1.TabIndex = 0
         ' 
         ' ButtonCONSULTAR
         ' 
-        ButtonCONSULTAR.BackColor = SystemColors.Menu
+        ButtonCONSULTAR.BackColor = SystemColors.Window
         ButtonCONSULTAR.Cursor = Cursors.Hand
         ButtonCONSULTAR.FlatAppearance.BorderColor = SystemColors.MenuHighlight
         ButtonCONSULTAR.FlatAppearance.BorderSize = 2
-        ButtonCONSULTAR.FlatAppearance.MouseDownBackColor = SystemColors.MenuHighlight
-        ButtonCONSULTAR.FlatAppearance.MouseOverBackColor = SystemColors.MenuHighlight
+        ButtonCONSULTAR.FlatAppearance.MouseDownBackColor = SystemColors.Menu
+        ButtonCONSULTAR.FlatAppearance.MouseOverBackColor = SystemColors.Menu
         ButtonCONSULTAR.FlatStyle = FlatStyle.Flat
         ButtonCONSULTAR.Font = New Font("Bahnschrift", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        ButtonCONSULTAR.Location = New Point(366, 4)
+        ButtonCONSULTAR.Location = New Point(245, 4)
         ButtonCONSULTAR.Name = "ButtonCONSULTAR"
         ButtonCONSULTAR.Size = New Size(115, 31)
         ButtonCONSULTAR.TabIndex = 4
@@ -68,15 +68,15 @@ Partial Class DAV
         ' 
         ' ButtonEXCLUIR
         ' 
-        ButtonEXCLUIR.BackColor = SystemColors.Menu
+        ButtonEXCLUIR.BackColor = SystemColors.Window
         ButtonEXCLUIR.Cursor = Cursors.Hand
-        ButtonEXCLUIR.FlatAppearance.BorderColor = SystemColors.MenuHighlight
+        ButtonEXCLUIR.FlatAppearance.BorderColor = Color.Red
         ButtonEXCLUIR.FlatAppearance.BorderSize = 2
-        ButtonEXCLUIR.FlatAppearance.MouseDownBackColor = SystemColors.MenuHighlight
-        ButtonEXCLUIR.FlatAppearance.MouseOverBackColor = SystemColors.MenuHighlight
+        ButtonEXCLUIR.FlatAppearance.MouseDownBackColor = SystemColors.Menu
+        ButtonEXCLUIR.FlatAppearance.MouseOverBackColor = SystemColors.Menu
         ButtonEXCLUIR.FlatStyle = FlatStyle.Flat
         ButtonEXCLUIR.Font = New Font("Bahnschrift", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        ButtonEXCLUIR.Location = New Point(245, 4)
+        ButtonEXCLUIR.Location = New Point(366, 5)
         ButtonEXCLUIR.Name = "ButtonEXCLUIR"
         ButtonEXCLUIR.Size = New Size(115, 31)
         ButtonEXCLUIR.TabIndex = 3
@@ -85,12 +85,12 @@ Partial Class DAV
         ' 
         ' ButtonALTERAR
         ' 
-        ButtonALTERAR.BackColor = SystemColors.Menu
+        ButtonALTERAR.BackColor = SystemColors.Window
         ButtonALTERAR.Cursor = Cursors.Hand
-        ButtonALTERAR.FlatAppearance.BorderColor = SystemColors.MenuHighlight
+        ButtonALTERAR.FlatAppearance.BorderColor = Color.FromArgb(CByte(192), CByte(192), CByte(0))
         ButtonALTERAR.FlatAppearance.BorderSize = 2
-        ButtonALTERAR.FlatAppearance.MouseDownBackColor = SystemColors.MenuHighlight
-        ButtonALTERAR.FlatAppearance.MouseOverBackColor = SystemColors.MenuHighlight
+        ButtonALTERAR.FlatAppearance.MouseDownBackColor = SystemColors.Menu
+        ButtonALTERAR.FlatAppearance.MouseOverBackColor = SystemColors.Menu
         ButtonALTERAR.FlatStyle = FlatStyle.Flat
         ButtonALTERAR.Font = New Font("Bahnschrift", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         ButtonALTERAR.Location = New Point(124, 4)
@@ -102,12 +102,12 @@ Partial Class DAV
         ' 
         ' ButtonINCLUIR
         ' 
-        ButtonINCLUIR.BackColor = SystemColors.Menu
+        ButtonINCLUIR.BackColor = SystemColors.Window
         ButtonINCLUIR.Cursor = Cursors.Hand
-        ButtonINCLUIR.FlatAppearance.BorderColor = SystemColors.MenuHighlight
+        ButtonINCLUIR.FlatAppearance.BorderColor = Color.FromArgb(CByte(0), CByte(192), CByte(0))
         ButtonINCLUIR.FlatAppearance.BorderSize = 2
-        ButtonINCLUIR.FlatAppearance.MouseDownBackColor = SystemColors.MenuHighlight
-        ButtonINCLUIR.FlatAppearance.MouseOverBackColor = SystemColors.MenuHighlight
+        ButtonINCLUIR.FlatAppearance.MouseDownBackColor = SystemColors.Menu
+        ButtonINCLUIR.FlatAppearance.MouseOverBackColor = SystemColors.Menu
         ButtonINCLUIR.FlatStyle = FlatStyle.Flat
         ButtonINCLUIR.Font = New Font("Bahnschrift", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         ButtonINCLUIR.Location = New Point(3, 4)
@@ -121,44 +121,46 @@ Partial Class DAV
         ' 
         PoisonDataGridViewDADOS.AllowUserToResizeRows = False
         PoisonDataGridViewDADOS.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
+        PoisonDataGridViewDADOS.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
+        PoisonDataGridViewDADOS.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
         PoisonDataGridViewDADOS.BackgroundColor = Color.FromArgb(CByte(255), CByte(255), CByte(255))
-        PoisonDataGridViewDADOS.BorderStyle = BorderStyle.None
+        PoisonDataGridViewDADOS.BorderStyle = BorderStyle.Fixed3D
         PoisonDataGridViewDADOS.CellBorderStyle = DataGridViewCellBorderStyle.None
         PoisonDataGridViewDADOS.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = Color.FromArgb(CByte(0), CByte(174), CByte(219))
-        DataGridViewCellStyle1.Font = New Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Pixel)
-        DataGridViewCellStyle1.ForeColor = Color.FromArgb(CByte(255), CByte(255), CByte(255))
-        DataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(CByte(0), CByte(198), CByte(247))
-        DataGridViewCellStyle1.SelectionForeColor = Color.FromArgb(CByte(17), CByte(17), CByte(17))
+        DataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.TopCenter
+        DataGridViewCellStyle1.BackColor = SystemColors.Menu
+        DataGridViewCellStyle1.Font = New Font("Bahnschrift SemiBold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        DataGridViewCellStyle1.ForeColor = Color.Black
+        DataGridViewCellStyle1.SelectionBackColor = SystemColors.ActiveCaption
+        DataGridViewCellStyle1.SelectionForeColor = Color.Black
         DataGridViewCellStyle1.WrapMode = DataGridViewTriState.True
         PoisonDataGridViewDADOS.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         PoisonDataGridViewDADOS.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle2.BackColor = Color.FromArgb(CByte(255), CByte(255), CByte(255))
-        DataGridViewCellStyle2.Font = New Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Pixel)
-        DataGridViewCellStyle2.ForeColor = Color.FromArgb(CByte(136), CByte(136), CByte(136))
-        DataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(CByte(0), CByte(198), CByte(247))
-        DataGridViewCellStyle2.SelectionForeColor = Color.FromArgb(CByte(17), CByte(17), CByte(17))
+        DataGridViewCellStyle2.Font = New Font("Bahnschrift", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        DataGridViewCellStyle2.ForeColor = Color.Black
+        DataGridViewCellStyle2.SelectionBackColor = SystemColors.Info
+        DataGridViewCellStyle2.SelectionForeColor = Color.Red
         DataGridViewCellStyle2.WrapMode = DataGridViewTriState.False
         PoisonDataGridViewDADOS.DefaultCellStyle = DataGridViewCellStyle2
         PoisonDataGridViewDADOS.EnableHeadersVisualStyles = False
         PoisonDataGridViewDADOS.Font = New Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Pixel)
         PoisonDataGridViewDADOS.GridColor = Color.FromArgb(CByte(255), CByte(255), CByte(255))
-        PoisonDataGridViewDADOS.Location = New Point(0, 41)
+        PoisonDataGridViewDADOS.Location = New Point(2, 41)
         PoisonDataGridViewDADOS.Name = "PoisonDataGridViewDADOS"
         PoisonDataGridViewDADOS.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = Color.FromArgb(CByte(0), CByte(174), CByte(219))
-        DataGridViewCellStyle3.Font = New Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Pixel)
-        DataGridViewCellStyle3.ForeColor = Color.FromArgb(CByte(255), CByte(255), CByte(255))
-        DataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(CByte(0), CByte(198), CByte(247))
-        DataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(CByte(17), CByte(17), CByte(17))
+        DataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.TopCenter
+        DataGridViewCellStyle3.BackColor = Color.White
+        DataGridViewCellStyle3.Font = New Font("Bahnschrift SemiBold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        DataGridViewCellStyle3.ForeColor = Color.Black
+        DataGridViewCellStyle3.SelectionBackColor = SystemColors.Info
+        DataGridViewCellStyle3.SelectionForeColor = Color.Red
         DataGridViewCellStyle3.WrapMode = DataGridViewTriState.True
         PoisonDataGridViewDADOS.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
         PoisonDataGridViewDADOS.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing
         PoisonDataGridViewDADOS.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-        PoisonDataGridViewDADOS.Size = New Size(744, 325)
+        PoisonDataGridViewDADOS.Size = New Size(983, 358)
         PoisonDataGridViewDADOS.TabIndex = 1
         ' 
         ' DAV
@@ -166,7 +168,7 @@ Partial Class DAV
         AutoScaleDimensions = New SizeF(96F, 96F)
         AutoScaleMode = AutoScaleMode.Dpi
         BackColor = SystemColors.Window
-        ClientSize = New Size(744, 444)
+        ClientSize = New Size(987, 444)
         Controls.Add(PoisonDataGridViewDADOS)
         Controls.Add(Panel1)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)

@@ -4,28 +4,112 @@ Public Class INCLUIR_ALTERAR_EXCLUIR
     ' Propriedades públicas
     Public Modo As String = "INCLUIR"
     Public IdRegistro As Integer = 0
+    Public CodigoDAV As String = ""
     Private Sub INCLUIR_ALTERAR_EXCLUIR_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        CarregarNumerDAV()
-        CarregarData()
-        CarregarClientePadrao()
-        ConfigurarGridProdutos()
-        CarregarVendedorPadrao()
+
+        Select Case Modo
+            Case "INCLUIR"
+                CarregarNumerDAV()
+                CarregarData()
+                CarregarClientePadrao()
+                CarregarVendedorPadrao()
+                ConfigurarGridProdutos()
+
+            Case "ALTERAR", "CONSULTAR"
+                CarregarDAVExistente()
+                ConfigurarGridProdutos()
+                CarregarNumerDAV()
+                CarregarData()
+                CarregarVendedorPadrao()
+
+                If Modo = "CONSULTAR" Then
+                    BloquearCampos()
+                End If
+        End Select
 
         ' Bloqueia campos somente leitura
         TextBoxCOD.ReadOnly = True
         TextBoxDATA.ReadOnly = True
         TextBoxNOMECLIENTE.ReadOnly = True
-        'TextBoxVENDEDOR.ReadOnly = True
         TextBoxNOMEPAGAMENTO.ReadOnly = True
         TextBoxVALORITENS.ReadOnly = True
-        'TextBoxVALORTOTAL.ReadOnly = True
 
-        ' Cores dos campos bloqueados
+        ' Cores
         TextBoxVENDEDOR.ForeColor = SystemColors.MenuHighlight
         TextBoxVALORTOTAL.ForeColor = Color.Red
 
     End Sub
+    Private Sub BloquearCampos()
+        TextBoxCODCLIENTE.ReadOnly = True
+        TextBoxCODVENDEDOR.ReadOnly = True
+        TextBoxCODPAGAMENTO.ReadOnly = True
+        TextBoxDESCONTOPORCENT.ReadOnly = True
+        TextBoxDESCONTOREAL.ReadOnly = True
+        TextBoxOBS.ReadOnly = True
+        PoisonDataGridViewPROCURAPRODUTOS.ReadOnly = True
+        ButtonCONFIRMAR.Enabled = False
+    End Sub
 
+    Private Sub CarregarDAVExistente()
+        Try
+            Using conn = ModDB.AbrirConexao()
+                ' Carrega o cabeçalho
+                Dim sql = "SELECT * FROM dav WHERE CODIGO = @cod"
+                Using cmd As New MySqlCommand(sql, conn)
+                    cmd.Parameters.AddWithValue("@cod", CodigoDAV)
+                    Using dr = cmd.ExecuteReader()
+                        If dr.Read() Then
+                            TextBoxCOD.Text = dr("CODIGO").ToString()
+                            TextBoxDATA.Text = Convert.ToDateTime(dr("EMISSAO")).ToString("dd/MM/yy")
+                            TextBoxCODCLIENTE.Text = dr("COD_CLIENTE").ToString()
+                            TextBoxNOMECLIENTE.Text = dr("NOME_CLIENTE").ToString()
+                            TextBoxCODVENDEDOR.Text = dr("COD_VENDEDOR").ToString()
+                            TextBoxVENDEDOR.Text = dr("NOME_VENDEDOR").ToString()
+                            TextBoxCODPAGAMENTO.Text = dr("COD_PAGAMENTO").ToString()
+                            TextBoxNOMEPAGAMENTO.Text = dr("NOME_PAGAMENTO").ToString()
+                            TextBoxOBS.Text = dr("OBS").ToString()
+                        End If
+                    End Using
+                End Using
+
+                ' Carrega os itens
+                Dim sqlItens = "SELECT * FROM dav_itens WHERE ID_DAV = " &
+                           "(SELECT ID FROM dav WHERE CODIGO = @cod)"
+                Using cmd As New MySqlCommand(sqlItens, conn)
+                    cmd.Parameters.AddWithValue("@cod", CodigoDAV)
+                    Using dr = cmd.ExecuteReader()
+                        TabelaProdutos = New DataTable()
+                        TabelaProdutos.Columns.Add("CODIGO")
+                        TabelaProdutos.Columns.Add("NOME")
+                        TabelaProdutos.Columns.Add("REFERENCIA")
+                        TabelaProdutos.Columns.Add("QTDE", GetType(Decimal))
+                        TabelaProdutos.Columns.Add("UNITARIO", GetType(Decimal))
+                        TabelaProdutos.Columns.Add("PERC_DESC", GetType(Decimal))
+                        TabelaProdutos.Columns.Add("VALOR_DESC", GetType(Decimal))
+                        TabelaProdutos.Columns.Add("TOTAL", GetType(Decimal))
+
+                        While dr.Read()
+                            Dim row = TabelaProdutos.NewRow()
+                            row("CODIGO") = dr("COD_PRODUTO").ToString()
+                            row("NOME") = dr("NOME_PRODUTO").ToString()
+                            row("REFERENCIA") = dr("REFERENCIA").ToString()
+                            row("QTDE") = Convert.ToDecimal(dr("QTDE"))
+                            row("UNITARIO") = Convert.ToDecimal(dr("UNITARIO"))
+                            row("PERC_DESC") = Convert.ToDecimal(dr("PERC_DESC"))
+                            row("VALOR_DESC") = Convert.ToDecimal(dr("VALOR_DESC"))
+                            row("TOTAL") = Convert.ToDecimal(dr("TOTAL"))
+                            TabelaProdutos.Rows.Add(row)
+                        End While
+                    End Using
+                End Using
+
+                PoisonDataGridViewPROCURAPRODUTOS.DataSource = TabelaProdutos
+                AtualizarTotais()
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Erro ao carregar DAV: " & ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
 
     ' ── Gera o próximo número do DAV sem duplicar ──
     Private Sub CarregarNumerDAV()
@@ -350,8 +434,8 @@ Public Class INCLUIR_ALTERAR_EXCLUIR
 
                     ' ── Salva o cabeçalho do DAV ──
                     Dim sqlDAV = "INSERT INTO dav (CODIGO, EMISSAO, COD_CLIENTE, NOME_CLIENTE, " &
-                                 "COD_VENDEDOR, NOME_VENDEDOR, TOTAL_GERAL, STATUS) " &
-                                 "VALUES (@cod, @emissao, @codcli, @nomecli, @codvend, @nomevend, @total, @status)"
+             "COD_VENDEDOR, NOME_VENDEDOR, COD_PAGAMENTO, NOME_PAGAMENTO, TOTAL_GERAL, STATUS, OBS) " &
+             "VALUES (@cod, @emissao, @codcli, @nomecli, @codvend, @nomevend, @codpag, @nomepag, @total, @status, @obs)"
 
                     Dim idDAV As Long
                     Using cmdDAV As New MySqlCommand(sqlDAV, conn, transaction)
@@ -363,6 +447,9 @@ Public Class INCLUIR_ALTERAR_EXCLUIR
                         cmdDAV.Parameters.AddWithValue("@nomevend", TextBoxVENDEDOR.Text)
                         cmdDAV.Parameters.AddWithValue("@total", totalGeral)
                         cmdDAV.Parameters.AddWithValue("@status", "ORÇANDO")
+                        cmdDAV.Parameters.AddWithValue("@nomepag", TextBoxNOMEPAGAMENTO.Text)
+                        cmdDAV.Parameters.AddWithValue("@codpag", TextBoxCODPAGAMENTO.Text)
+                        cmdDAV.Parameters.AddWithValue("@obs", TextBoxOBS.Text)
                         cmdDAV.ExecuteNonQuery()
                         idDAV = cmdDAV.LastInsertedId
                     End Using
@@ -606,5 +693,13 @@ Public Class INCLUIR_ALTERAR_EXCLUIR
             End If
             e.SuppressKeyPress = True
         End If
+    End Sub
+    Private Sub INCLUIR_ALTERAR_EXCLUIR_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        Try
+            PoisonDataGridViewPROCURAPRODUTOS.DataSource = Nothing
+            TabelaProdutos?.Clear()
+            TabelaProdutos?.Dispose()
+        Catch ex As Exception
+        End Try
     End Sub
 End Class
