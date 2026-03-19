@@ -86,7 +86,7 @@ Partial Class INCLUIR_ALTERAR_EXCLUIR
         TextBoxCOD.Location = New Point(12, 35)
         TextBoxCOD.Name = "TextBoxCOD"
         TextBoxCOD.Size = New Size(100, 23)
-        TextBoxCOD.TabIndex = 11
+        TextBoxCOD.TabIndex = 99
         TextBoxCOD.TextAlign = HorizontalAlignment.Center
         ' 
         ' TextBoxDATA
@@ -98,7 +98,7 @@ Partial Class INCLUIR_ALTERAR_EXCLUIR
         TextBoxDATA.Location = New Point(118, 35)
         TextBoxDATA.Name = "TextBoxDATA"
         TextBoxDATA.Size = New Size(100, 23)
-        TextBoxDATA.TabIndex = 3
+        TextBoxDATA.TabIndex = 98
         TextBoxDATA.TextAlign = HorizontalAlignment.Center
         ' 
         ' Label2
@@ -148,7 +148,7 @@ Partial Class INCLUIR_ALTERAR_EXCLUIR
         TextBoxNOMECLIENTE.Location = New Point(274, 35)
         TextBoxNOMECLIENTE.Name = "TextBoxNOMECLIENTE"
         TextBoxNOMECLIENTE.Size = New Size(263, 23)
-        TextBoxNOMECLIENTE.TabIndex = 6
+        TextBoxNOMECLIENTE.TabIndex = 97
         TextBoxNOMECLIENTE.TextAlign = HorizontalAlignment.Center
         ' 
         ' TextBoxVENDEDOR
@@ -161,7 +161,7 @@ Partial Class INCLUIR_ALTERAR_EXCLUIR
         TextBoxVENDEDOR.Location = New Point(593, 35)
         TextBoxVENDEDOR.Name = "TextBoxVENDEDOR"
         TextBoxVENDEDOR.Size = New Size(132, 23)
-        TextBoxVENDEDOR.TabIndex = 9
+        TextBoxVENDEDOR.TabIndex = 96
         TextBoxVENDEDOR.TextAlign = HorizontalAlignment.Center
         ' 
         ' TextBoxCODVENDEDOR
@@ -200,7 +200,7 @@ Partial Class INCLUIR_ALTERAR_EXCLUIR
         PanelCABECALHO.Location = New Point(0, 0)
         PanelCABECALHO.Name = "PanelCABECALHO"
         PanelCABECALHO.Size = New Size(733, 62)
-        PanelCABECALHO.TabIndex = 0
+        PanelCABECALHO.TabIndex = 100
         ' 
         ' PoisonDataGridViewPROCURAPRODUTOS
         ' 
@@ -226,7 +226,7 @@ Partial Class INCLUIR_ALTERAR_EXCLUIR
         DataGridViewCellStyle2.BackColor = Color.White
         DataGridViewCellStyle2.Font = New Font("Bahnschrift", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         DataGridViewCellStyle2.ForeColor = Color.Black
-        DataGridViewCellStyle2.SelectionBackColor = SystemColors.Info
+        DataGridViewCellStyle2.SelectionBackColor = SystemColors.ScrollBar
         DataGridViewCellStyle2.SelectionForeColor = Color.Red
         DataGridViewCellStyle2.WrapMode = DataGridViewTriState.False
         PoisonDataGridViewPROCURAPRODUTOS.DefaultCellStyle = DataGridViewCellStyle2
@@ -271,7 +271,7 @@ Partial Class INCLUIR_ALTERAR_EXCLUIR
         TextBoxDESCONTOREAL.Location = New Point(109, 27)
         TextBoxDESCONTOREAL.Name = "TextBoxDESCONTOREAL"
         TextBoxDESCONTOREAL.Size = New Size(100, 23)
-        TextBoxDESCONTOREAL.TabIndex = 1
+        TextBoxDESCONTOREAL.TabIndex = 4
         TextBoxDESCONTOREAL.TextAlign = HorizontalAlignment.Center
         ' 
         ' Label6
@@ -296,7 +296,7 @@ Partial Class INCLUIR_ALTERAR_EXCLUIR
         TextBoxDESCONTOPORCENT.Location = New Point(3, 27)
         TextBoxDESCONTOPORCENT.Name = "TextBoxDESCONTOPORCENT"
         TextBoxDESCONTOPORCENT.Size = New Size(100, 23)
-        TextBoxDESCONTOPORCENT.TabIndex = 0
+        TextBoxDESCONTOPORCENT.TabIndex = 3
         TextBoxDESCONTOPORCENT.TextAlign = HorizontalAlignment.Center
         ' 
         ' Label5
@@ -335,7 +335,7 @@ Partial Class INCLUIR_ALTERAR_EXCLUIR
         TextBoxVALORTOTAL.Location = New Point(142, 28)
         TextBoxVALORTOTAL.Name = "TextBoxVALORTOTAL"
         TextBoxVALORTOTAL.Size = New Size(132, 23)
-        TextBoxVALORTOTAL.TabIndex = 17
+        TextBoxVALORTOTAL.TabIndex = 93
         TextBoxVALORTOTAL.TextAlign = HorizontalAlignment.Center
         ' 
         ' Label9
@@ -360,7 +360,7 @@ Partial Class INCLUIR_ALTERAR_EXCLUIR
         TextBoxVALORITENS.Location = New Point(4, 28)
         TextBoxVALORITENS.Name = "TextBoxVALORITENS"
         TextBoxVALORITENS.Size = New Size(132, 23)
-        TextBoxVALORITENS.TabIndex = 15
+        TextBoxVALORITENS.TabIndex = 94
         TextBoxVALORITENS.TextAlign = HorizontalAlignment.Center
         ' 
         ' Label7
@@ -397,7 +397,7 @@ Partial Class INCLUIR_ALTERAR_EXCLUIR
         TextBoxNOMEPAGAMENTO.Location = New Point(44, 27)
         TextBoxNOMEPAGAMENTO.Name = "TextBoxNOMEPAGAMENTO"
         TextBoxNOMEPAGAMENTO.Size = New Size(190, 23)
-        TextBoxNOMEPAGAMENTO.TabIndex = 0
+        TextBoxNOMEPAGAMENTO.TabIndex = 95
         TextBoxNOMEPAGAMENTO.TextAlign = HorizontalAlignment.Center
         ' 
         ' TextBoxCODPAGAMENTO
@@ -409,7 +409,7 @@ Partial Class INCLUIR_ALTERAR_EXCLUIR
         TextBoxCODPAGAMENTO.Location = New Point(3, 27)
         TextBoxCODPAGAMENTO.Name = "TextBoxCODPAGAMENTO"
         TextBoxCODPAGAMENTO.Size = New Size(39, 23)
-        TextBoxCODPAGAMENTO.TabIndex = 0
+        TextBoxCODPAGAMENTO.TabIndex = 5
         TextBoxCODPAGAMENTO.TextAlign = HorizontalAlignment.Center
         ' 
         ' Label11
@@ -438,7 +438,7 @@ Partial Class INCLUIR_ALTERAR_EXCLUIR
         ButtonCONFIRMAR.Location = New Point(369, 334)
         ButtonCONFIRMAR.Name = "ButtonCONFIRMAR"
         ButtonCONFIRMAR.Size = New Size(113, 36)
-        ButtonCONFIRMAR.TabIndex = 6
+        ButtonCONFIRMAR.TabIndex = 7
         ButtonCONFIRMAR.Text = "CONFIRMAR"
         ButtonCONFIRMAR.UseVisualStyleBackColor = True
         ' 
@@ -455,7 +455,7 @@ Partial Class INCLUIR_ALTERAR_EXCLUIR
         ButtonCANCELAR.Location = New Point(488, 334)
         ButtonCANCELAR.Name = "ButtonCANCELAR"
         ButtonCANCELAR.Size = New Size(113, 36)
-        ButtonCANCELAR.TabIndex = 7
+        ButtonCANCELAR.TabIndex = 8
         ButtonCANCELAR.Text = "CANCELAR"
         ButtonCANCELAR.UseVisualStyleBackColor = True
         ' 
@@ -472,7 +472,7 @@ Partial Class INCLUIR_ALTERAR_EXCLUIR
         ButtonFECHAR.Location = New Point(607, 334)
         ButtonFECHAR.Name = "ButtonFECHAR"
         ButtonFECHAR.Size = New Size(113, 36)
-        ButtonFECHAR.TabIndex = 8
+        ButtonFECHAR.TabIndex = 9
         ButtonFECHAR.Text = "FECHAR"
         ButtonFECHAR.UseVisualStyleBackColor = True
         ' 
@@ -485,7 +485,7 @@ Partial Class INCLUIR_ALTERAR_EXCLUIR
         TextBoxOBS.Location = New Point(3, 347)
         TextBoxOBS.Name = "TextBoxOBS"
         TextBoxOBS.Size = New Size(360, 23)
-        TextBoxOBS.TabIndex = 5
+        TextBoxOBS.TabIndex = 6
         TextBoxOBS.TextAlign = HorizontalAlignment.Center
         ' 
         ' Label12

@@ -29,6 +29,9 @@ Public Class ESTOQUE
 
         Await Task.Run(Sub() CarregarExcel())
 
+        ' ✅ Proteção dupla
+        If _cancelar OrElse Me.IsDisposed OrElse Not Me.IsHandleCreated Then Return
+
         ' ← Se fechou durante o carregamento, não atualiza a UI
         If _cancelar OrElse Me.IsDisposed Then Return
 

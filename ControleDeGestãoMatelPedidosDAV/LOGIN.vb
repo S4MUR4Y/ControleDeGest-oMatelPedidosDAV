@@ -30,7 +30,6 @@ Public Class LOGIN
 
             Select Case resultado
                 Case "OK"
-
                     ' Salva usuário e senha na máquina
                     My.Settings.UsuarioSalvo = PoisonTextBoxLOGIN.Text
                     My.Settings.SenhaSalva = PoisonTextBoxSENHA.Text
@@ -38,11 +37,13 @@ Public Class LOGIN
 
                     PoisonProgressBarPROGRESSO.Value = 80
                     LabelPROGRESSO.Text = "Carregando sistema..."
-                    Await Task.Delay(800) ' Pequena pausa visual
+                    Await Task.Delay(800)
                     PoisonProgressBarPROGRESSO.Value = 100
+
+                    'Abre o MENU e fecha o LOGIN
+                    Dim frmMenu As New MENU()
+                    frmMenu.Show()
                     Me.Hide()
-                    Dim menu As New MENU()
-                    menu.Show()
 
                 Case "SENHA_ERRADA"
                     PoisonProgressBarPROGRESSO.Value = 0

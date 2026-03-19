@@ -24,20 +24,17 @@ Partial Class MENU
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MENU))
         Panel1 = New Panel()
-        PictureBoxFECHAR = New PictureBox()
         ButtonESTOQUE = New Button()
         ButtonPEDIDOS = New Button()
         ButtonDAV = New Button()
         PanelMDIPAI = New Panel()
         Panel1.SuspendLayout()
-        CType(PictureBoxFECHAR, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' Panel1
         ' 
         Panel1.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right
         Panel1.BackColor = SystemColors.Menu
-        Panel1.Controls.Add(PictureBoxFECHAR)
         Panel1.Controls.Add(ButtonESTOQUE)
         Panel1.Controls.Add(ButtonPEDIDOS)
         Panel1.Controls.Add(ButtonDAV)
@@ -45,18 +42,6 @@ Partial Class MENU
         Panel1.Name = "Panel1"
         Panel1.Size = New Size(1124, 39)
         Panel1.TabIndex = 0
-        ' 
-        ' PictureBoxFECHAR
-        ' 
-        PictureBoxFECHAR.Anchor = AnchorStyles.Top Or AnchorStyles.Right
-        PictureBoxFECHAR.Cursor = Cursors.Hand
-        PictureBoxFECHAR.Image = CType(resources.GetObject("PictureBoxFECHAR.Image"), Image)
-        PictureBoxFECHAR.Location = New Point(1091, 5)
-        PictureBoxFECHAR.Name = "PictureBoxFECHAR"
-        PictureBoxFECHAR.Size = New Size(30, 30)
-        PictureBoxFECHAR.SizeMode = PictureBoxSizeMode.StretchImage
-        PictureBoxFECHAR.TabIndex = 2
-        PictureBoxFECHAR.TabStop = False
         ' 
         ' ButtonESTOQUE
         ' 
@@ -126,14 +111,12 @@ Partial Class MENU
         ClientSize = New Size(1124, 604)
         Controls.Add(PanelMDIPAI)
         Controls.Add(Panel1)
-        FormBorderStyle = FormBorderStyle.None
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
         Name = "MENU"
         StartPosition = FormStartPosition.CenterScreen
         Text = "SAYTECH | MENU"
         WindowState = FormWindowState.Maximized
         Panel1.ResumeLayout(False)
-        CType(PictureBoxFECHAR, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
     End Sub
 
@@ -142,5 +125,4 @@ Partial Class MENU
     Friend WithEvents ButtonPEDIDOS As Button
     Friend WithEvents ButtonDAV As Button
     Friend WithEvents ButtonESTOQUE As Button
-    Friend WithEvents PictureBoxFECHAR As PictureBox
 End Class

@@ -20,21 +20,13 @@
         frm.Show()
     End Sub
 
-    Private Sub PictureBoxFECHAR_Click(sender As Object, e As EventArgs) Handles PictureBoxFECHAR.Click
-        Dim resultado = MessageBox.Show("Deseja realmente sair?", "Sair",
-                     MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-        If resultado = DialogResult.Yes Then
-            Environment.Exit(0)
+    Private Sub MENU_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        Dim resposta = MessageBox.Show("Deseja sair do sistema?", "Confirmar Saída",
+                                   MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+        If resposta = DialogResult.No Then
+            e.Cancel = True  ' Cancela o fechamento
         End If
     End Sub
-
-    Protected Overrides ReadOnly Property CreateParams() As CreateParams
-        Get
-            Dim cp As CreateParams = MyBase.CreateParams
-            cp.ClassStyle = cp.ClassStyle Or &H200
-            Return cp
-        End Get
-    End Property
 
     Private Sub ButtonDAV_Click(sender As Object, e As EventArgs) Handles ButtonDAV.Click
         AbrirFormNoPanel(New DAV())

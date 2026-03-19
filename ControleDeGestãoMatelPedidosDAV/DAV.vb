@@ -119,4 +119,97 @@ Public Class DAV
         Catch ex As Exception
         End Try
     End Sub
+    Private Sub ButtonIMPRIMIR_Click(sender As Object, e As EventArgs) Handles ButtonIMPRIMIR.Click
+        If PoisonDataGridViewDADOS.CurrentRow Is Nothing Then
+            MessageBox.Show("Selecione um DAV para imprimir!", "Atenção",
+                MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        Dim codigoDAV = PoisonDataGridViewDADOS.CurrentRow.Cells("Nº DAV").Value.ToString()
+
+        Try
+            Using conn = ModDB.AbrirConexao()
+                Dim ptBR = System.Globalization.CultureInfo.GetCultureInfo("pt-BR")
+
+                ' ── Carrega cabeçalho do DAV ──
+                Dim dadosDAV As New Dictionary(Of String, String)
+                Dim sql = "SELECT * FROM dav WHERE CODIGO = @cod"
+                Using cmd As New MySqlCommand(sql, conn)
+                    cmd.Parameters.AddWithValue("@cod", codigoDAV)
+                    Using dr = cmd.ExecuteReader()
+                        If dr.Read() Then
+                            Dim totalGeral = Convert.ToDecimal(dr("TOTAL_GERAL"))
+                            Dim descReal = If(IsDBNull(dr("DESC_REAL")), 0D, Convert.ToDecimal(dr("DESC_REAL")))
+                            Dim totalProdutos = totalGeral + descReal
+
+                            dadosDAV = New Dictionary(Of String, String) From {
+                                {"CODIGO", dr("CODIGO").ToString()},
+                                {"EMISSAO", Convert.ToDateTime(dr("EMISSAO")).ToString("dd/MM/yy")},
+                                {"COD_CLIENTE", dr("COD_CLIENTE").ToString()},
+                                {"NOME_CLIENTE", dr("NOME_CLIENTE").ToString()},
+                                {"COD_VENDEDOR", dr("COD_VENDEDOR").ToString()},
+                                {"NOME_VENDEDOR", dr("NOME_VENDEDOR").ToString()},
+                                {"COD_PAGAMENTO", dr("COD_PAGAMENTO").ToString()},
+                                {"NOME_PAGAMENTO", dr("NOME_PAGAMENTO").ToString()},
+                                {"OBS", dr("OBS").ToString()},
+                                {"DESC_PERC", If(IsDBNull(dr("DESC_PERC")), "0,00", Convert.ToDecimal(dr("DESC_PERC")).ToString("0.00", ptBR))},
+                                {"DESC_REAL", descReal.ToString("C2", ptBR)},
+                                {"TOTAL_PRODUTOS", totalProdutos.ToString("C2", ptBR)},
+                                {"VALOR_DESC", descReal.ToString("C2", ptBR)},
+                                {"TOTAL_GERAL", totalGeral.ToString("C2", ptBR)}
+                            }
+                        Else
+                            MessageBox.Show("DAV não encontrado!", "Atenção",
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                            Return
+                        End If
+                    End Using
+                End Using
+
+                ' ── Carrega itens do DAV ──
+                Dim itensDAV As New List(Of Dictionary(Of String, String))
+                Dim sqlItens = "SELECT * FROM dav_itens WHERE ID_DAV = " &
+                               "(SELECT ID FROM dav WHERE CODIGO = @cod)"
+                Using cmd As New MySqlCommand(sqlItens, conn)
+                    cmd.Parameters.AddWithValue("@cod", codigoDAV)
+                    Using dr = cmd.ExecuteReader()
+                        While dr.Read()
+                            itensDAV.Add(New Dictionary(Of String, String) From {
+                                {"CODIGO", dr("COD_PRODUTO").ToString()},
+                                {"NOME", dr("NOME_PRODUTO").ToString()},
+                                {"REFERENCIA", dr("REFERENCIA").ToString()},
+                                {"QTDE", Convert.ToDecimal(dr("QTDE")).ToString("0.###")},
+                                {"UNITARIO", Convert.ToDecimal(dr("UNITARIO")).ToString("C2", ptBR)},
+                                {"TOTAL", Convert.ToDecimal(dr("TOTAL")).ToString("C2", ptBR)}
+                            })
+                        End While
+                    End Using
+                End Using
+
+                If itensDAV.Count = 0 Then
+                    MessageBox.Show("Este DAV não possui itens para imprimir!", "Atenção",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    Return
+                End If
+
+                ' ── Pergunta o tipo de impressão ──
+                Dim opcao = MessageBox.Show(
+                    "Clique SIM para imprimir Romaneio Térmico." &
+                    Environment.NewLine & "Clique NÃO para gerar PDF A4.",
+                    "Tipo de Impressão", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
+                If opcao = DialogResult.Yes Then
+                    ModImpressao.ImprimirRomaneio(dadosDAV, itensDAV)
+                Else
+                    ModImpressao.GerarDAVPDF(dadosDAV, itensDAV)
+                End If
+
+            End Using
+
+        Catch ex As Exception
+            MessageBox.Show("Erro ao imprimir DAV: " & ex.Message, "Erro",
+                MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
 End Class

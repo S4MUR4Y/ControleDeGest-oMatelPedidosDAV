@@ -32,6 +32,7 @@ Partial Class DAV
         ButtonALTERAR = New Button()
         ButtonINCLUIR = New Button()
         PoisonDataGridViewDADOS = New ReaLTaiizor.Controls.PoisonDataGridView()
+        ButtonIMPRIMIR = New Button()
         Panel1.SuspendLayout()
         CType(PoisonDataGridViewDADOS, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
@@ -40,6 +41,7 @@ Partial Class DAV
         ' 
         Panel1.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right
         Panel1.BackColor = SystemColors.Menu
+        Panel1.Controls.Add(ButtonIMPRIMIR)
         Panel1.Controls.Add(ButtonCONSULTAR)
         Panel1.Controls.Add(ButtonEXCLUIR)
         Panel1.Controls.Add(ButtonALTERAR)
@@ -140,7 +142,7 @@ Partial Class DAV
         DataGridViewCellStyle2.BackColor = Color.FromArgb(CByte(255), CByte(255), CByte(255))
         DataGridViewCellStyle2.Font = New Font("Bahnschrift", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         DataGridViewCellStyle2.ForeColor = Color.Black
-        DataGridViewCellStyle2.SelectionBackColor = SystemColors.Info
+        DataGridViewCellStyle2.SelectionBackColor = SystemColors.ScrollBar
         DataGridViewCellStyle2.SelectionForeColor = Color.Red
         DataGridViewCellStyle2.WrapMode = DataGridViewTriState.False
         PoisonDataGridViewDADOS.DefaultCellStyle = DataGridViewCellStyle2
@@ -154,7 +156,7 @@ Partial Class DAV
         DataGridViewCellStyle3.BackColor = Color.White
         DataGridViewCellStyle3.Font = New Font("Bahnschrift SemiBold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         DataGridViewCellStyle3.ForeColor = Color.Black
-        DataGridViewCellStyle3.SelectionBackColor = SystemColors.Info
+        DataGridViewCellStyle3.SelectionBackColor = SystemColors.ScrollBar
         DataGridViewCellStyle3.SelectionForeColor = Color.Red
         DataGridViewCellStyle3.WrapMode = DataGridViewTriState.True
         PoisonDataGridViewDADOS.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
@@ -162,6 +164,23 @@ Partial Class DAV
         PoisonDataGridViewDADOS.SelectionMode = DataGridViewSelectionMode.FullRowSelect
         PoisonDataGridViewDADOS.Size = New Size(983, 358)
         PoisonDataGridViewDADOS.TabIndex = 1
+        ' 
+        ' ButtonIMPRIMIR
+        ' 
+        ButtonIMPRIMIR.BackColor = SystemColors.Window
+        ButtonIMPRIMIR.Cursor = Cursors.Hand
+        ButtonIMPRIMIR.FlatAppearance.BorderColor = Color.Black
+        ButtonIMPRIMIR.FlatAppearance.BorderSize = 2
+        ButtonIMPRIMIR.FlatAppearance.MouseDownBackColor = SystemColors.Menu
+        ButtonIMPRIMIR.FlatAppearance.MouseOverBackColor = SystemColors.Menu
+        ButtonIMPRIMIR.FlatStyle = FlatStyle.Flat
+        ButtonIMPRIMIR.Font = New Font("Bahnschrift", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        ButtonIMPRIMIR.Location = New Point(487, 5)
+        ButtonIMPRIMIR.Name = "ButtonIMPRIMIR"
+        ButtonIMPRIMIR.Size = New Size(115, 31)
+        ButtonIMPRIMIR.TabIndex = 5
+        ButtonIMPRIMIR.Text = "IMPRIMIR"
+        ButtonIMPRIMIR.UseVisualStyleBackColor = False
         ' 
         ' DAV
         ' 
@@ -188,4 +207,5 @@ Partial Class DAV
     Friend WithEvents ButtonEXCLUIR As Button
     Friend WithEvents ButtonALTERAR As Button
     Friend WithEvents PoisonDataGridViewDADOS As ReaLTaiizor.Controls.PoisonDataGridView
+    Friend WithEvents ButtonIMPRIMIR As Button
 End Class
